@@ -286,4 +286,24 @@ class MemberRepositoryTest {
         List<Member> memberByAge = memberRepository.findMemberByAge(10);
         assertThat(memberByAge.get(0).getUsername()).isEqualTo("member1");
     }
+
+    @Test
+    void findMemberCustom(){
+        Member member1 = new Member("AAA", 10);
+        Member member2 = new Member("BBB", 20);
+        Member member3 = new Member("CCC", 30);
+        Member member4 = new Member("DDD", 40);
+        Member member5 = new Member("FFF", 50);
+
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        memberRepository.save(member3);
+        memberRepository.save(member4);
+        memberRepository.save(member5);
+
+        List<Member> members = memberRepository.findMemberCustom();
+
+        assertThat(members.size()).isEqualTo(5);
+
+    }
 }

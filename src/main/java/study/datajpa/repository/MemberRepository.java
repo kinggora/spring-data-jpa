@@ -14,7 +14,7 @@ import study.datajpa.domain.MemberDto;
 
 import java.util.List;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
 
     List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
 
@@ -50,9 +50,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findMemberFetchJoin();
 
     //공통 메서드 오버라이드
-//    @Override
-//    @EntityGraph(attributePaths = {"team"})
-//    List<Member> findAll();
+    @Override
+    @EntityGraph(attributePaths = {"team"})
+    Page<Member> findAll(Pageable pageable);
 
     //엔티티 그래프 + JPQL
     @EntityGraph(attributePaths = {"team"})
